@@ -1,0 +1,6 @@
+{
+  "extends": "amex",
+  "rules": {
+    "consistent-return": 0
+  }
+}
