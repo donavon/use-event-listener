@@ -12,7 +12,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/donavon/event-listener.git"
+    "url": "https://github.com/donavon/use-event-listener.git"
   },
   "scripts": {
     "prepublishOnly": "npm run build",
