@@ -41,11 +41,51 @@ Here are the parameters that you can use. (\* = optional)
 | :---------- | :---------------------------------------------------------------------------------------------------------------- |
 | `eventName` | The event name (string). Here is a list of [commoon events](https://developer.mozilla.org/en-US/docs/Web/Events). |
 | `handler`   | A function that will be called whenever `eventName` fires on `element`.                                           |
-| `element`\* | An optional element to listen on. Defaults to `global` (i.e., `window`).                                                           |
+| `element`\* | An optional element to listen on. Defaults to `global` (i.e., `window`).                                          |
 
 ### Return
 
 This hook returns nothing.
+
+## Example
+
+Let's look at some sample code. Suppose you would like to track the mouse
+position. You _could_ subscribe to mouse move events with like this.
+
+```js
+const useMouseMove = () => {
+  const [coords, setCoords] = useState([0, 0]);
+
+  useEffect(() => {
+    const handler = ({ clientX, clientY }) => {
+      setCoords([clientX, clientY]);
+    };
+    window.addEventListener('mousemove', handler);
+    return () => {
+      window.removeEventListener('mousemove', handler);
+    };
+  }, []);
+
+  return coords;
+};
+```
+
+Here we're using `useEffect` to roll our own handler add/remove event listener.
+
+`useEventListener` abstracts this away. You only need to care about the event name
+and the handler function.
+
+```js
+const useMouseMove = () => {
+  const [coords, setCoords] = useState([0, 0]);
+
+  useEventListener('mousemove', ({ clientX, clientY }) => {
+    setCoords([clientX, clientY]);
+  });
+
+  return coords;
+};
+```
 
 ## License
 

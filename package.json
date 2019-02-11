@@ -4,7 +4,7 @@
     "access": "public"
   },
   "version": "0.1.1",
-  "description": "A custom React Hook thst provides a useEventListener.",
+  "description": "A custom React Hook that provides a useEventListener.",
   "main": "dist/event-listener.js",
   "umd:main": "dist/event-listener.umd.js",
   "module": "dist/event-listener.m.js",
@@ -54,10 +54,10 @@
   "jest": {
     "coverageThreshold": {
       "global": {
-        "branches": 0,
-        "functions": 0,
-        "lines": 0,
-        "statements": 0
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
       }
     }
   }
