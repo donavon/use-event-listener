@@ -1,9 +1,8 @@
 # @use-it/event-listener
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
 
 A custom React Hook thst provides a declarative useEventListener.
 
-[![npm version](https://badge.fury.io/js/%40use-it%2Fevent-listener.svg)](https://badge.fury.io/js/%40use-it%2Fevent-listener)
+[![npm version](https://badge.fury.io/js/%40use-it%2Fevent-listener.svg)](https://badge.fury.io/js/%40use-it%2Fevent-listener) [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
 
 This hook was inspired by [Dan Abramov](https://github.com/gaearon)'s
 blog post
@@ -87,6 +86,12 @@ const useMouseMove = () => {
   return coords;
 };
 ```
+
+## Live demo
+
+You can view/edit the sample code above on CodeSandbox.
+
+[![Edit demo app on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/k38lyx2q9o)
 
 ## License
 
