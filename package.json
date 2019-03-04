@@ -9,6 +9,7 @@
   "umd:main": "dist/event-listener.umd.js",
   "module": "dist/event-listener.m.js",
   "source": "src/index.js",
+  "types": "types/index.d.ts",
   "license": "MIT",
   "repository": {
     "type": "git",
