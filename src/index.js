@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 
-const useEventListener = (eventName, handler, element = global) => {
+const useEventListener = (eventName, handler, element = global, useCapture = false) => {
   const savedHandler = useRef();
 
   useEffect(() => {
@@ -13,9 +13,9 @@ const useEventListener = (eventName, handler, element = global) => {
       if (!isSupported) return;
 
       const eventListener = event => savedHandler.current(event);
-      element.addEventListener(eventName, eventListener);
+      element.addEventListener(eventName, eventListener, useCapture);
       return () => {
-        element.removeEventListener(eventName, eventListener);
+        element.removeEventListener(eventName, eventListener, useCapture);
       };
     },
     [eventName, element]

@@ -30,18 +30,19 @@ $ yarn add @use-it/event-listener
 Here is a basic setup.
 
 ```js
-useEventListener(eventName, handler, element);
+useEventListener(eventName, handler, element, useCapture);
 ```
 
 ### Parameters
 
 Here are the parameters that you can use. (\* = optional)
 
-| Parameter   | Description                                                                                                      |
-| :---------- | :--------------------------------------------------------------------------------------------------------------- |
-| `eventName` | The event name (string). Here is a list of [common events](https://developer.mozilla.org/en-US/docs/Web/Events). |
-| `handler`   | A function that will be called whenever `eventName` fires on `element`.                                          |
-| `element`\* | An optional element to listen on. Defaults to `global` (i.e., `window`).                                         |
+| Parameter      | Description                                                                                                      |
+| :------------- | :--------------------------------------------------------------------------------------------------------------- |
+| `eventName`    | The event name (string). Here is a list of [common events](https://developer.mozilla.org/en-US/docs/Web/Events). |
+| `handler`      | A function that will be called whenever `eventName` fires on `element`.                                          |
+| `element`\*    | An optional element to listen on. Defaults to `global` (i.e., `window`).                                         |
+| `useCapture`\* | An optional flag to use the capturing event mode..                                                               |
 
 ### Return
 
