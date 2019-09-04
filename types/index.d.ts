@@ -1,11 +1,9 @@
-import { EventHandler, SyntheticEvent } from 'react';
-
 /**
  * A custom React Hook that provides a declarative useEventListener.
  */
-declare function useEventListener<T extends SyntheticEvent<any>>(
+declare function useEventListener<T extends Event>(
   eventName: string,
-  handler: EventHandler<T>,
+  handler: (event: T) => void,
   element?: HTMLElement
 ): void;
 
