@@ -6,7 +6,7 @@ import { EventHandler, SyntheticEvent } from 'react';
 declare function useEventListener<T extends SyntheticEvent<any>>(
   eventName: string,
   handler: EventHandler<T>,
-  element?: HTMLElement
+  element?: HTMLElement | null
 ): void;
 
 export as namespace useEventListener;
