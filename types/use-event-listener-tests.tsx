@@ -1,8 +1,10 @@
 import useEventListener from './index'
 
 declare const element: HTMLElement
-
+declare const elementOrNull: HTMLElement | null
 useEventListener('click', (_: MouseEvent) => { }, element)
+useEventListener('click', (_: MouseEvent) => { }, elementOrNull)
+useEventListener('fullscreenchange', (_: Event) => { }, elementOrNull)
 
 useEventListener('click', (_: MouseEvent) => { }, document)
 useEventListener('resize', (_: UIEvent) => { }, document)

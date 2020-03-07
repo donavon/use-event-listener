@@ -55,6 +55,17 @@ describe('useEventListener', () => {
     addEventListenerSpy.mockRestore();
   });
 
+  test('does not add event listener to `window` if `element` is `null`', () => {
+    const handler = jest.fn();
+    const addEventListenerSpy = jest.spyOn(global, 'addEventListener');
+
+    testHook(() => {
+      useEventListener('foo', handler, null);
+    });
+
+    expect(addEventListenerSpy).not.toBeCalledWith('foo', handler)
+  })
+
   test('fails safe with SSR (i.e. no window)', () => {
     const handler = jest.fn();
 

@@ -4,7 +4,8 @@
 declare function useEventListener<K extends keyof HTMLElementEventMap>(
   eventName: K,
   handler: HTMLElementEventMap[K],
-  element: HTMLElement
+  // allow null to support usage with `useRef<HTMLElement | null>(null)`
+  element: HTMLElement | null
 ): void;
 declare function useEventListener<K extends keyof DocumentEventMap>(
   eventName: K,
@@ -19,7 +20,7 @@ declare function useEventListener<K extends keyof WindowEventMap>(
 declare function useEventListener(
   eventName: string,
   handler: EventListenerOrEventListenerObject,
-  element?: HTMLElement | Window | Document
+  element?: HTMLElement | Window | Document | null
 ): void;
 declare function useEventListener<
   K extends keyof (HTMLElementEventMap & DocumentEventMap & WindowEventMap)
@@ -28,7 +29,7 @@ declare function useEventListener<
   handler: (
     event: (HTMLElementEventMap & DocumentEventMap & WindowEventMap)[K]
   ) => void,
-  element?: HTMLElement | Document | Window
+  element?: HTMLElement | Document | Window | null
 ): void;
 
 export as namespace useEventListener;
