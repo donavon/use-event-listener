@@ -43,7 +43,18 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "bvanderdrift",
+      "name": "Beer van der Drift",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/6398452?v=4",
+      "profile": "https://github.com/bvanderdrift",
+      "contributions": [
+        "test",
+        "code"
+      ]
     }
   ],
-  "contributorsPerLine": 7
+  "contributorsPerLine": 7,
+  "skipCi": true
 }
