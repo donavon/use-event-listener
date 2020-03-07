@@ -5,22 +5,22 @@ declare function useEventListener<K extends keyof HTMLElementEventMap>(
   eventName: K,
   handler: HTMLElementEventMap[K],
   element: HTMLElement
-);
+): void;
 declare function useEventListener<K extends keyof DocumentEventMap>(
   eventName: K,
   handler: DocumentEventMap[K],
   element: Document
-);
+): void;
 declare function useEventListener<K extends keyof WindowEventMap>(
   eventName: K,
   handler: WindowEventMap[K],
   element?: Window
-);
+): void;
 declare function useEventListener(
   eventName: string,
   handler: EventListenerOrEventListenerObject,
   element?: HTMLElement | Window | Document
-);
+): void;
 declare function useEventListener<
   K extends keyof (HTMLElementEventMap & DocumentEventMap & WindowEventMap)
 >(

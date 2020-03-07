@@ -18,7 +18,7 @@
   "scripts": {
     "prepublishOnly": "npm run build",
     "lint": "eslint src",
-    "test": "jest --verbose --coverage --silent",
+    "test": "jest --verbose --coverage --silent && tsc -p types/tsconfig.json",
     "test:watch": "jest --watch --runInBand --silent",
     "prebuild": "npm run lint && npm t && rimraf dist",
     "build": "microbundle -o dist/ --sourcemap false --target web",
@@ -47,7 +47,8 @@
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
     "react-testing-library": "^5.5.0",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "typescript": "^3.8.3"
   },
   "peerDependencies": {
     "react": "^16.8.0"
