@@ -1,8 +1,7 @@
-import { testHook, cleanup } from 'react-testing-library';
+import { renderHook } from '@testing-library/react-hooks';
 import 'jest-dom/extend-expect';
 
 import useEventListener from '../src';
-
 
 const mouseMoveEvent = { clientX: 100, clientY: 200 };
 let hackHandler = null;
@@ -14,12 +13,10 @@ const mockElement = {
   removeEventListener: () => {
     hackHandler = null;
   },
-  dispatchEvent: (event) => {
+  dispatchEvent: event => {
     hackHandler(event);
   },
 };
-
-afterEach(cleanup);
 
 describe('useEventListener', () => {
   test('import useEventListener from "@use-it/event-listener"', () => {
@@ -30,9 +27,9 @@ describe('useEventListener', () => {
     const handler = jest.fn();
     const addEventListenerSpy = jest.spyOn(mockElement, 'addEventListener');
 
-    testHook(() => {
-      useEventListener('foo', handler, mockElement);
-    });
+    renderHook(() => 
+      useEventListener('foo', handler, mockElement)
+    );
 
     expect(addEventListenerSpy).toBeCalled();
 
@@ -46,9 +43,9 @@ describe('useEventListener', () => {
     const handler = jest.fn();
     const addEventListenerSpy = jest.spyOn(global, 'addEventListener');
 
-    testHook(() => {
-      useEventListener('foo', handler);
-    });
+    renderHook(() => 
+      useEventListener('foo', handler)
+    );
 
     expect(addEventListenerSpy).toBeCalled();
 
@@ -59,18 +56,18 @@ describe('useEventListener', () => {
     const handler = jest.fn();
     const addEventListenerSpy = jest.spyOn(global, 'addEventListener');
 
-    testHook(() => {
-      useEventListener('foo', handler, null);
-    });
+    renderHook(() => 
+      useEventListener('foo', handler, null)
+    );
 
-    expect(addEventListenerSpy).not.toBeCalledWith('foo', handler)
-  })
+    expect(addEventListenerSpy).not.toBeCalledWith('foo', handler);
+  });
 
   test('fails safe with SSR (i.e. no window)', () => {
     const handler = jest.fn();
 
-    testHook(() => {
-      useEventListener('foo', handler, {});
-    });
+    renderHook(() => 
+      useEventListener('foo', handler, {})
+    );
   });
 });
