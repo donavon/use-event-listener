@@ -102,9 +102,19 @@ You can view/edit the sample code above on CodeSandbox.
 Thanks goes to these wonderful people ([emoji key](https://github.com/all-contributors/all-contributors#emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore -->
-| [<img src="https://avatars3.githubusercontent.com/u/887639?v=4" width="100px;" alt="Donavon West"/><br /><sub><b>Donavon West</b></sub>](http://donavon.com)<br />[🚇](#infra-donavon "Infrastructure (Hosting, Build-Tools, etc)") [⚠️](https://github.com/donavon/use-event-listener/commits?author=donavon "Tests") [💡](#example-donavon "Examples") [🤔](#ideas-donavon "Ideas, Planning, & Feedback") [🚧](#maintenance-donavon "Maintenance") [👀](#review-donavon "Reviewed Pull Requests") [🔧](#tool-donavon "Tools") [💻](https://github.com/donavon/use-event-listener/commits?author=donavon "Code") | [<img src="https://avatars3.githubusercontent.com/u/8732191?v=4" width="100px;" alt="Kevin Kipp"/><br /><sub><b>Kevin Kipp</b></sub>](https://github.com/third774)<br />[💻](https://github.com/donavon/use-event-listener/commits?author=third774 "Code") | [<img src="https://avatars1.githubusercontent.com/u/1288694?v=4" width="100px;" alt="Justin Hall"/><br /><sub><b>Justin Hall</b></sub>](https://github.com/wKovacs64)<br />[💻](https://github.com/donavon/use-event-listener/commits?author=wKovacs64 "Code") [📖](https://github.com/donavon/use-event-listener/commits?author=wKovacs64 "Documentation") |
-| :---: | :---: | :---: |
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="http://donavon.com"><img src="https://avatars3.githubusercontent.com/u/887639?v=4" width="100px;" alt=""/><br /><sub><b>Donavon West</b></sub></a><br /><a href="#infra-donavon" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/donavon/use-event-listener/commits?author=donavon" title="Tests">⚠️</a> <a href="#example-donavon" title="Examples">💡</a> <a href="#ideas-donavon" title="Ideas, Planning, & Feedback">🤔</a> <a href="#maintenance-donavon" title="Maintenance">🚧</a> <a href="https://github.com/donavon/use-event-listener/pulls?q=is%3Apr+reviewed-by%3Adonavon" title="Reviewed Pull Requests">👀</a> <a href="#tool-donavon" title="Tools">🔧</a> <a href="https://github.com/donavon/use-event-listener/commits?author=donavon" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/third774"><img src="https://avatars3.githubusercontent.com/u/8732191?v=4" width="100px;" alt=""/><br /><sub><b>Kevin Kipp</b></sub></a><br /><a href="https://github.com/donavon/use-event-listener/commits?author=third774" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/wKovacs64"><img src="https://avatars1.githubusercontent.com/u/1288694?v=4" width="100px;" alt=""/><br /><sub><b>Justin Hall</b></sub></a><br /><a href="https://github.com/donavon/use-event-listener/commits?author=wKovacs64" title="Code">💻</a> <a href="https://github.com/donavon/use-event-listener/commits?author=wKovacs64" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/huan086"><img src="https://avatars2.githubusercontent.com/u/1448788?v=4" width="100px;" alt=""/><br /><sub><b>Jeow Li Huan</b></sub></a><br /><a href="https://github.com/donavon/use-event-listener/pulls?q=is%3Apr+reviewed-by%3Ahuan086" title="Reviewed Pull Requests">👀</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
