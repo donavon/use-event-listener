@@ -43,7 +43,17 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "normanrz",
+      "name": "Norman Rzepka",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/335438?v=4",
+      "profile": "http://normanrz.com/",
+      "contributions": [
+        "ideas"
+      ]
     }
   ],
-  "contributorsPerLine": 7
+  "contributorsPerLine": 7,
+  "skipCi": true
 }
