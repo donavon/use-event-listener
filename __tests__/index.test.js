@@ -7,7 +7,7 @@ const mouseMoveEvent = { clientX: 100, clientY: 200 };
 let hackHandler = null;
 
 const mockElement = {
-  addEventListener: (eventName, handler) => {
+  addEventListener: (eventName, handler, options) => {
     hackHandler = handler;
   },
   removeEventListener: () => {
@@ -23,14 +23,15 @@ describe('useEventListener', () => {
     expect(typeof useEventListener).toBe('function');
   });
 
-  test('you pass an `eventName`, `handler`, and an `element`', () => {
+  test('you pass an `eventName`, `handler`, and an `element`', async () => {
     const handler = jest.fn();
     const addEventListenerSpy = jest.spyOn(mockElement, 'addEventListener');
 
-    renderHook(() => 
+    const { waitForNextUpdate } = renderHook(() => 
       useEventListener('foo', handler, mockElement)
     );
 
+    await waitForNextUpdate
     expect(addEventListenerSpy).toBeCalled();
 
     mockElement.dispatchEvent(mouseMoveEvent);
@@ -70,4 +71,48 @@ describe('useEventListener', () => {
       useEventListener('foo', handler, {})
     );
   });
+
+
+  test('`options` are passed to `addEventListener`', () => {
+    const handler = jest.fn();
+    const addEventListenerSpy = jest.spyOn(mockElement, 'addEventListener');
+
+    renderHook(() => {
+      useEventListener('foo', handler, mockElement, {
+        capture: true,
+        passive: true,
+      });
+    });
+
+    expect(addEventListenerSpy).toBeCalledWith(
+      'foo',
+      expect.any(Function),
+      expect.objectContaining({ capture: true, passive: true })
+    );
+
+    addEventListenerSpy.mockRestore();
+  });
+
+  test('changing the identity of `options` does not cause effect to rerun', () => {
+    const handler = jest.fn();
+    const addEventListenerSpy = jest.spyOn(mockElement, 'addEventListener');
+
+    const { rerender } = renderHook(() => {
+      useEventListener('foo', handler, mockElement, {
+        capture: true,
+        passive: true,
+      });
+    });
+    const numberOfCalls = addEventListenerSpy.mock.calls.length
+
+    rerender(() => {
+      useEventListener('foo', handler, mockElement, {
+        capture: true,
+        passive: true,
+      });
+    });
+    expect(addEventListenerSpy).toBeCalledTimes(numberOfCalls)
+
+    addEventListenerSpy.mockRestore();
+  })
 });

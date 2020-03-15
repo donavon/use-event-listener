@@ -19,3 +19,8 @@ useEventListener('click', (_: Event) => { }, something)
 declare const eventListenerObject: EventListenerObject
 useEventListener('click', eventListenerObject)
 useEventListener('click', eventListenerObject, something)
+
+
+useEventListener('click', (_: MouseEvent) => { }, window, undefined)
+useEventListener('click', (_: MouseEvent) => { }, window, { passive: true })
+useEventListener('click', (_: MouseEvent) => { }, window, { capture: true, passive: true })
