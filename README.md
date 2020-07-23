@@ -30,7 +30,7 @@ $ yarn add @use-it/event-listener
 Here is a basic setup.
 
 ```js
-useEventListener(eventName, handler, element);
+useEventListener(eventName, handler, element, options);
 ```
 
 ### Parameters
@@ -42,6 +42,7 @@ Here are the parameters that you can use. (\* = optional)
 | `eventName` | The event name (string). Here is a list of [common events](https://developer.mozilla.org/en-US/docs/Web/Events). |
 | `handler`   | A function that will be called whenever `eventName` fires on `element`.                                          |
 | `element`\* | An optional element to listen on. Defaults to `global` (i.e., `window`).                                         |
+| `options`\* |  An object `{ capture?: boolean, passive?: boolean }` to be passed to `addEventListener`. For advanced use cases. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) for details. |
 
 ### Return
 
@@ -110,6 +111,7 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/all-contri
     <td align="center"><a href="https://github.com/third774"><img src="https://avatars3.githubusercontent.com/u/8732191?v=4" width="100px;" alt=""/><br /><sub><b>Kevin Kipp</b></sub></a><br /><a href="https://github.com/donavon/use-event-listener/commits?author=third774" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/wKovacs64"><img src="https://avatars1.githubusercontent.com/u/1288694?v=4" width="100px;" alt=""/><br /><sub><b>Justin Hall</b></sub></a><br /><a href="https://github.com/donavon/use-event-listener/commits?author=wKovacs64" title="Code">💻</a> <a href="https://github.com/donavon/use-event-listener/commits?author=wKovacs64" title="Documentation">📖</a></td>
     <td align="center"><a href="http://normanrz.com/"><img src="https://avatars1.githubusercontent.com/u/335438?v=4" width="100px;" alt=""/><br /><sub><b>Norman Rzepka</b></sub></a><br /><a href="#ideas-normanrz" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://github.com/bvanderdrift"><img src="https://avatars1.githubusercontent.com/u/6398452?v=4" width="100px;" alt=""/><br /><sub><b>Beer van der Drift</b></sub></a><br /><a href="https://github.com/donavon/use-event-listener/commits?author=bvanderdrift" title="Tests">⚠️</a> <a href="https://github.com/donavon/use-event-listener/commits?author=bvanderdrift" title="Code">💻</a></td>
   </tr>
 </table>
 
