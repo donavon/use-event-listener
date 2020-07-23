@@ -52,6 +52,25 @@
       "contributions": [
         "review"
       ]
+    },
+    {
+      "login": "normanrz",
+      "name": "Norman Rzepka",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/335438?v=4",
+      "profile": "http://normanrz.com/",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "bvanderdrift",
+      "name": "Beer van der Drift",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/6398452?v=4",
+      "profile": "https://github.com/bvanderdrift",
+      "contributions": [
+        "test",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
