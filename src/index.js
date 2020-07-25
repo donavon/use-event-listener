@@ -21,7 +21,7 @@ const useEventListener = (eventName, handler, element = global, options) => {
       const eventListener = event => savedHandler.current(event);
       element.addEventListener(eventName, eventListener, memoOptions);
       return () => {
-        element.removeEventListener(eventName, eventListener);
+        element.removeEventListener(eventName, eventListener, memoOptions);
       };
     },
     [eventName, element, memoOptions]
