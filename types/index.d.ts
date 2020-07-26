@@ -1,4 +1,4 @@
-type Options = Pick<AddEventListenerOptions, 'capture' | 'passive'>
+type Options = Pick<AddEventListenerOptions, 'capture' | 'passive' | 'once'>;
 
 /**
  * A custom React Hook that provides a declarative useEventListener.

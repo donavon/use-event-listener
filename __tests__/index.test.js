@@ -13,7 +13,7 @@ const mockElement = {
   removeEventListener: () => {
     hackHandler = null;
   },
-  dispatchEvent: event => {
+  dispatchEvent: (event) => {
     hackHandler(event);
   },
 };
@@ -27,11 +27,11 @@ describe('useEventListener', () => {
     const handler = jest.fn();
     const addEventListenerSpy = jest.spyOn(mockElement, 'addEventListener');
 
-    const { waitForNextUpdate } = renderHook(() => 
+    const { waitForNextUpdate } = renderHook(() =>
       useEventListener('foo', handler, mockElement)
     );
 
-    await waitForNextUpdate
+    await waitForNextUpdate;
     expect(addEventListenerSpy).toBeCalled();
 
     mockElement.dispatchEvent(mouseMoveEvent);
@@ -44,9 +44,7 @@ describe('useEventListener', () => {
     const handler = jest.fn();
     const addEventListenerSpy = jest.spyOn(global, 'addEventListener');
 
-    renderHook(() => 
-      useEventListener('foo', handler)
-    );
+    renderHook(() => useEventListener('foo', handler));
 
     expect(addEventListenerSpy).toBeCalled();
 
@@ -57,9 +55,7 @@ describe('useEventListener', () => {
     const handler = jest.fn();
     const addEventListenerSpy = jest.spyOn(global, 'addEventListener');
 
-    renderHook(() => 
-      useEventListener('foo', handler, null)
-    );
+    renderHook(() => useEventListener('foo', handler, null));
 
     expect(addEventListenerSpy).not.toBeCalledWith('foo', handler);
   });
@@ -67,11 +63,8 @@ describe('useEventListener', () => {
   test('fails safe with SSR (i.e. no window)', () => {
     const handler = jest.fn();
 
-    renderHook(() => 
-      useEventListener('foo', handler, {})
-    );
+    renderHook(() => useEventListener('foo', handler, {}));
   });
-
 
   test('`options` are passed to `addEventListener`', () => {
     const handler = jest.fn();
@@ -103,7 +96,7 @@ describe('useEventListener', () => {
         passive: true,
       });
     });
-    const numberOfCalls = addEventListenerSpy.mock.calls.length
+    const numberOfCalls = addEventListenerSpy.mock.calls.length;
 
     rerender(() => {
       useEventListener('foo', handler, mockElement, {
@@ -111,8 +104,8 @@ describe('useEventListener', () => {
         passive: true,
       });
     });
-    expect(addEventListenerSpy).toBeCalledTimes(numberOfCalls)
+    expect(addEventListenerSpy).toBeCalledTimes(numberOfCalls);
 
     addEventListenerSpy.mockRestore();
-  })
+  });
 });
