@@ -37,12 +37,12 @@ useEventListener(eventName, handler, element, options);
 
 Here are the parameters that you can use. (\* = optional)
 
-| Parameter   | Description                                                                                                      |
-| :---------- | :--------------------------------------------------------------------------------------------------------------- |
-| `eventName` | The event name (string). Here is a list of [common events](https://developer.mozilla.org/en-US/docs/Web/Events). |
-| `handler`   | A function that will be called whenever `eventName` fires on `element`.                                          |
-| `element`\* | An optional element to listen on. Defaults to `global` (i.e., `window`).                                         |
-| `options`\* |  An object `{ capture?: boolean, passive?: boolean }` to be passed to `addEventListener`. For advanced use cases. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) for details. |
+| Parameter   | Description                                                                                                                                                                                                                            |
+| :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `eventName` | The event name (string). Here is a list of [common events](https://developer.mozilla.org/en-US/docs/Web/Events).                                                                                                                       |
+| `handler`   | A function that will be called whenever `eventName` fires on `element`.                                                                                                                                                                |
+| `element`\* | An optional element to listen on. Defaults to `global` (i.e., `window`).                                                                                                                                                               |
+| `options`\* | An object `{ capture?: boolean, passive?: boolean, once?: boolean }` to be passed to `addEventListener`. For advanced use cases. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) for details. |
 
 ### Return
 
@@ -119,6 +119,7 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/all-contri
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
