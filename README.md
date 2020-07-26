@@ -113,6 +113,7 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/all-contri
     <td align="center"><a href="https://github.com/huan086"><img src="https://avatars2.githubusercontent.com/u/1448788?v=4" width="100px;" alt=""/><br /><sub><b>Jeow Li Huan</b></sub></a><br /><a href="https://github.com/donavon/use-event-listener/pulls?q=is%3Apr+reviewed-by%3Ahuan086" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="http://normanrz.com/"><img src="https://avatars1.githubusercontent.com/u/335438?v=4" width="100px;" alt=""/><br /><sub><b>Norman Rzepka</b></sub></a><br /><a href="#ideas-normanrz" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="https://github.com/bvanderdrift"><img src="https://avatars1.githubusercontent.com/u/6398452?v=4" width="100px;" alt=""/><br /><sub><b>Beer van der Drift</b></sub></a><br /><a href="https://github.com/donavon/use-event-listener/commits?author=bvanderdrift" title="Tests">⚠️</a> <a href="https://github.com/donavon/use-event-listener/commits?author=bvanderdrift" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/pruge"><img src="https://avatars1.githubusercontent.com/u/5827473?v=4" width="100px;" alt=""/><br /><sub><b>clingsoft</b></sub></a><br /><a href="https://github.com/donavon/use-event-listener/commits?author=pruge" title="Code">💻</a></td>
   </tr>
 </table>
 
