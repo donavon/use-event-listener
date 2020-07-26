@@ -71,6 +71,15 @@
         "test",
         "code"
       ]
+    },
+    {
+      "login": "pruge",
+      "name": "clingsoft",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/5827473?v=4",
+      "profile": "https://github.com/pruge",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
