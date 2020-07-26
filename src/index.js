@@ -1,31 +1,32 @@
-import { useRef, useEffect, useMemo } from 'react';
+/* eslint-disable max-params */
+import { useRef, useEffect } from 'react';
 
-const useEventListener = (eventName, handler, element = global, options) => {
+const useEventListener = (
+  eventName,
+  handler,
+  element = global,
+  options = {}
+) => {
   const savedHandler = useRef();
+  const { capture, passive, once } = options;
 
   useEffect(() => {
     savedHandler.current = handler;
   }, [handler]);
 
-  const capture = options ? options.capture : undefined;
-  const passive = options ? options.passive : undefined;
+  useEffect(() => {
+    const isSupported = element && element.addEventListener;
+    if (!isSupported) {
+      return;
+    }
 
-  // Rerun the effect only if capture or passive has actually changed
-  const memoOptions = useMemo(() => ({ capture, passive }), [capture, passive]);
-
-  useEffect(
-    () => {
-      const isSupported = element && element.addEventListener;
-      if (!isSupported) return;
-
-      const eventListener = event => savedHandler.current(event);
-      element.addEventListener(eventName, eventListener, memoOptions);
-      return () => {
-        element.removeEventListener(eventName, eventListener, memoOptions);
-      };
-    },
-    [eventName, element, memoOptions]
-  );
+    const eventListener = (event) => savedHandler.current(event);
+    const opts = { capture, passive, once };
+    element.addEventListener(eventName, eventListener, opts);
+    return () => {
+      element.removeEventListener(eventName, eventListener, opts);
+    };
+  }, [eventName, element, capture, passive, once]);
 };
 
 export default useEventListener;
