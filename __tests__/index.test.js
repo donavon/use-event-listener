@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
-import 'jest-dom/extend-expect';
+import '@testing-library/jest-dom/extend-expect';
 
 import useEventListener from '../src';
 
