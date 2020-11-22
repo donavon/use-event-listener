@@ -4,7 +4,7 @@
     "access": "public",
     "tag": "next"
   },
-  "version": "1.0.0-beta",
+  "version": "1.0.0-beta.2",
   "description": "A custom React Hook that provides a useEventListener.",
   "license": "MIT",
   "author": "Donavon West <github@donavon.com> (https://donavon.com/)",

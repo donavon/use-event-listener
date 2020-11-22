@@ -12,16 +12,27 @@ type Options = {
   once?: boolean;
 };
 
+interface EventListener<T> {
+  (evt: T): void;
+}
+interface EventListenerObject<T> {
+  handleEvent(evt: T): void;
+}
+
+type EventListenerOrEventListenerObject<T> =
+  | EventListener<T>
+  | EventListenerObject<T>;
+
 /** Provides a declarative addEventListener */
-const useEventListener = (
+const useEventListener = <T,>(
   /** eventName - The name of the event. */
   eventName: string,
   /** A function that handles the event or an object implementing the `EventListener` interface. */
-  handler: EventListenerOrEventListenerObject,
+  handler: EventListenerOrEventListenerObject<T>,
   /** A optional object containing `element`, `capture`, `passive`, and `once`. */
   options: Options = {}
 ) => {
-  const savedHandlerRef = useRef<EventListenerOrEventListenerObject>();
+  const savedHandlerRef = useRef<EventListenerOrEventListenerObject<T>>();
   const { element = globalEventTarget, capture, passive, once } = options;
 
   useEffect(() => {
@@ -34,11 +45,12 @@ const useEventListener = (
       return;
     }
 
-    const eventListener = (event: Event) => {
+    const eventListener = (evt: Event) => {
+      const event = (evt as unknown) as any;
       if (savedHandlerRef.current!.hasOwnProperty('handleEvent')) {
-        (savedHandlerRef.current! as EventListenerObject).handleEvent(event);
+        (savedHandlerRef.current! as EventListenerObject<T>).handleEvent(event);
       } else {
-        (savedHandlerRef.current! as EventListener)(event);
+        (savedHandlerRef.current! as EventListener<T>)(event);
       }
     };
 

@@ -14,11 +14,23 @@ const useMouseMove = () => {
   return coords;
 };
 
+const useKeyDown = () => {
+  const [key, setKey] = React.useState('');
+  useEventListener('keydown', (ev: KeyboardEvent) => {
+    setKey(ev.key);
+  });
+  return key;
+};
+
 const App = () => {
   const [x, y] = useMouseMove();
+  const key = useKeyDown();
   return (
     <h1>
-      The mouse position is ({x}, {y})
+      <div>
+        The mouse position is ({x}, {y})
+      </div>
+      <div>Last key pressed: {key}</div>
     </h1>
   );
 };
