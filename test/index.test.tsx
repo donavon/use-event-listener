@@ -1,21 +1,42 @@
 import { renderHook } from '@testing-library/react-hooks';
-import '@testing-library/jest-dom/extend-expect';
 
 import useEventListener from '../src';
 
-const mouseMoveEvent = { clientX: 100, clientY: 200 };
-let hackHandler = null;
+type Options = {
+  capture?: boolean;
+  passive?: boolean;
+  once?: boolean;
+};
 
-const mockElement = {
-  addEventListener: (eventName, handler, options) => {
-    hackHandler = handler;
-  },
-  removeEventListener: () => {
-    hackHandler = null;
-  },
-  dispatchEvent: (event) => {
-    hackHandler(event);
-  },
+const mouseMoveEvent = new MouseEvent('mousemove', {
+  clientX: 100,
+  clientY: 200,
+});
+
+const createMockElement = () => {
+  let hackHandler: EventListenerOrEventListenerObject | null = null;
+
+  const mockElement: EventTarget = {
+    addEventListener: (
+      _eventName: string,
+      handler: EventListenerOrEventListenerObject,
+      _options: Options
+    ) => {
+      hackHandler = handler;
+    },
+    removeEventListener: () => {
+      hackHandler = null;
+    },
+    dispatchEvent: (event: Event) => {
+      if (hackHandler!.hasOwnProperty('handleEvent')) {
+        (hackHandler! as EventListenerObject).handleEvent(event);
+      } else {
+        (hackHandler! as EventListener)(event);
+      }
+      return true;
+    },
+  };
+  return mockElement;
 };
 
 describe('useEventListener', () => {
@@ -25,17 +46,37 @@ describe('useEventListener', () => {
 
   test('you pass an `eventName`, `handler`, and an `element`', async () => {
     const handler = jest.fn();
+    const mockElement = createMockElement();
     const addEventListenerSpy = jest.spyOn(mockElement, 'addEventListener');
 
-    const { waitForNextUpdate } = renderHook(() =>
-      useEventListener('foo', handler, mockElement)
+    renderHook(() =>
+      useEventListener('foo', handler, { element: mockElement })
     );
 
-    await waitForNextUpdate;
     expect(addEventListenerSpy).toBeCalled();
 
     mockElement.dispatchEvent(mouseMoveEvent);
     expect(handler).toBeCalledWith(mouseMoveEvent);
+
+    addEventListenerSpy.mockRestore();
+  });
+
+  test('you pass an `eventName`, `handler Object`, and an `element`', async () => {
+    const handlerObject = {
+      handleEvent: jest.fn(),
+    };
+    const mockElement = createMockElement();
+
+    const addEventListenerSpy = jest.spyOn(mockElement, 'addEventListener');
+
+    renderHook(() =>
+      useEventListener('foo', handlerObject, { element: mockElement })
+    );
+
+    expect(addEventListenerSpy).toBeCalled();
+
+    mockElement.dispatchEvent(mouseMoveEvent);
+    expect(handlerObject.handleEvent).toBeCalledWith(mouseMoveEvent);
 
     addEventListenerSpy.mockRestore();
   });
@@ -51,29 +92,26 @@ describe('useEventListener', () => {
     addEventListenerSpy.mockRestore();
   });
 
-  test('does not add event listener to `window` if `element` is `null`', () => {
+  test('does not add event listener to `window` if `element` is `null` (i.e. SSR)', () => {
     const handler = jest.fn();
     const addEventListenerSpy = jest.spyOn(global, 'addEventListener');
 
-    renderHook(() => useEventListener('foo', handler, null));
+    renderHook(() => useEventListener('foo', handler, { element: null }));
 
     expect(addEventListenerSpy).not.toBeCalledWith('foo', handler);
   });
 
-  test('fails safe with SSR (i.e. no window)', () => {
-    const handler = jest.fn();
-
-    renderHook(() => useEventListener('foo', handler, {}));
-  });
-
   test('`options` are passed to `addEventListener`', () => {
     const handler = jest.fn();
+    const mockElement = createMockElement();
+
     const addEventListenerSpy = jest.spyOn(mockElement, 'addEventListener');
 
     renderHook(() => {
-      useEventListener('foo', handler, mockElement, {
+      useEventListener('foo', handler, {
         capture: true,
         passive: true,
+        element: mockElement,
       });
     });
 
@@ -88,20 +126,23 @@ describe('useEventListener', () => {
 
   test('changing the identity of `options` does not cause effect to rerun', () => {
     const handler = jest.fn();
+    const mockElement = createMockElement();
     const addEventListenerSpy = jest.spyOn(mockElement, 'addEventListener');
 
     const { rerender } = renderHook(() => {
-      useEventListener('foo', handler, mockElement, {
+      useEventListener('foo', handler, {
         capture: true,
         passive: true,
+        element: mockElement,
       });
     });
     const numberOfCalls = addEventListenerSpy.mock.calls.length;
 
     rerender(() => {
-      useEventListener('foo', handler, mockElement, {
+      useEventListener('foo', handler, {
         capture: true,
         passive: true,
+        element: mockElement,
       });
     });
     expect(addEventListenerSpy).toBeCalledTimes(numberOfCalls);

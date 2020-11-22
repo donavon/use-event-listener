@@ -1,8 +1,10 @@
 # @use-it/event-listener
 
-A custom React Hook that provides a declarative useEventListener.
+A custom React Hook that provides a declarative addEventListener.
 
-[![npm version](https://badge.fury.io/js/%40use-it%2Fevent-listener.svg)](https://badge.fury.io/js/%40use-it%2Fevent-listener) [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors)
+> Note: Version 1.x has been completely rewritten in TypeScript. See [Parameters](#parameters) below important breaking changes.
+
+[![npm version](https://badge.fury.io/js/%40use-it%2Fevent-listener.svg)](https://badge.fury.io/js/%40use-it%2Fevent-listener) [![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors)
 
 This hook was inspired by [Dan Abramov](https://github.com/gaearon)'s
 blog post
@@ -30,19 +32,32 @@ $ yarn add @use-it/event-listener
 Here is a basic setup.
 
 ```js
-useEventListener(eventName, handler, element, options);
+useEventListener(eventName, handler [, options]);
 ```
 
-### Parameters
+### Parameters <a name="parameters"></a>
 
-Here are the parameters that you can use. (\* = optional)
+Here are the parameters that you can use. (\* = optional).
 
-| Parameter   | Description                                                                                                                                                                                                                            |
-| :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `eventName` | The event name (string). Here is a list of [common events](https://developer.mozilla.org/en-US/docs/Web/Events).                                                                                                                       |
-| `handler`   | A function that will be called whenever `eventName` fires on `element`.                                                                                                                                                                |
-| `element`\* | An optional element to listen on. Defaults to `global` (i.e., `window`).                                                                                                                                                               |
-| `options`\* | An object `{ capture?: boolean, passive?: boolean, once?: boolean }` to be passed to `addEventListener`. For advanced use cases. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) for details. |
+> Note: in version 1.0, `element` is now a key in `options`. This represents a **breaking change** that _could_ effect your code. Be sure to test before updating to 1.x from version 0.x.
+
+| Parameter   | Description                                                                                                                                                                                                                        |
+| :---------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `eventName` | The event name (string). Here is a list of [common events](https://developer.mozilla.org/en-US/docs/Web/Events).                                                                                                                   |
+| `handler`   | A function that will be called whenever `eventName` fires on `element`. New in version 1.x: this can also be an object implementing the [EventListener](https://developer.mozilla.org/en-US/docs/Web/API/EventListener) interface. |
+| `options`\* | An optional `Options` object (see below).                                                                                                                                                                                          |
+
+### Options <a name="parameters"></a>
+
+Here is the Options object. All keys are optional.
+See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) for details on `capture`, `passive`, and `once`.
+
+| Key       | Description                                                                                                                                                          |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `element` | An optional element to listen on. Defaults to `global` (i.e. `window`)                                                                                               |
+| `capture` | A Boolean indicating that events of this type will be dispatched to the registered listener before being dispatched to any `EventTarget` beneath it in the DOM tree. |
+| `passive` | A Boolean indicating that the handler will never call `preventDefault()`.                                                                                            |
+| `once`    | A Boolean indicating that the handler should be invoked at most once after being added. If true, the handler would be automatically removed when invoked.            |
 
 ### Return
 
@@ -79,11 +94,21 @@ and the handler function.
 ```js
 const useMouseMove = () => {
   const [coords, setCoords] = useState([0, 0]);
-
   useEventListener('mousemove', ({ clientX, clientY }) => {
     setCoords([clientX, clientY]);
   });
+  return coords;
+};
+```
 
+In TypeScript you can specify the type of the `Event` to be more specific. Here we set the handler's event type to `MouseEvent`.
+
+```ts
+const useMouseMove = () => {
+  const [coords, setCoords] = React.useState([0, 0]);
+  useEventListener('mousemove', ({ clientX, clientY }: MouseEvent) => {
+    setCoords([clientX, clientY]);
+  });
   return coords;
 };
 ```
