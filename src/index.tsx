@@ -1,9 +1,9 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, MutableRefObject } from 'react';
 import { globalEventTarget } from 'global-event-target'; // window, global, globalThis, or null if SSR
 
-type Options = {
+export type Options = {
   /** The element to listen on. Defaults to `global` (i.e. `window`). */
-  element?: EventTarget | null;
+  element?: EventTarget | MutableRefObject<EventTarget | null> | null;
   /** Indicates events will be dispatched to the registered listener before being dispatched to any EventTarget beneath it in the DOM tree. */
   capture?: boolean;
   /** Indicates that the handler will never call `preventDefault()`. */
@@ -40,8 +40,15 @@ const useEventListener = <T,>(
   }, [handler]);
 
   useEffect(() => {
-    const isSupported = element && element.addEventListener;
-    if (!isSupported) {
+    const isRefObject = element?.hasOwnProperty('current');
+    const currentTarget = isRefObject
+      ? (element as MutableRefObject<EventTarget | null>).current
+      : (element as EventTarget | null);
+
+    if (
+      currentTarget === null ||
+      typeof currentTarget.addEventListener !== 'function'
+    ) {
       return;
     }
 
@@ -55,9 +62,9 @@ const useEventListener = <T,>(
     };
 
     const opts = { capture, passive, once };
-    element!.addEventListener(eventName, eventListener, opts);
+    currentTarget.addEventListener(eventName, eventListener, opts);
     return () => {
-      element!.removeEventListener(eventName, eventListener, opts);
+      currentTarget.removeEventListener(eventName, eventListener, opts);
     };
   }, [eventName, element, capture, passive, once]);
 };

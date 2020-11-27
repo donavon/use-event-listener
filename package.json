@@ -4,7 +4,7 @@
     "access": "public",
     "tag": "next"
   },
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.3",
   "description": "A custom React Hook that provides a useEventListener.",
   "license": "MIT",
   "author": "Donavon West <github@donavon.com> (https://donavon.com/)",
@@ -72,6 +72,7 @@
   },
   "devDependencies": {
     "@size-limit/preset-small-lib": "^4.9.0",
+    "@testing-library/react": "^11.2.2",
     "@testing-library/react-hooks": "^3.4.2",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",

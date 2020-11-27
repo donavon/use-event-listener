@@ -1,12 +1,10 @@
+import { render, screen, fireEvent } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
+import * as React from 'react';
 
-import useEventListener from '../src';
+import useEventListener, { Options } from '../src';
 
-type Options = {
-  capture?: boolean;
-  passive?: boolean;
-  once?: boolean;
-};
+type MouseEventHandler<T = Element> = React.EventHandler<React.MouseEvent<T>>;
 
 const mouseMoveEvent = new MouseEvent('mousemove', {
   clientX: 100,
@@ -47,18 +45,30 @@ describe('useEventListener', () => {
   test('you pass an `eventName`, `handler`, and an `element`', async () => {
     const handler = jest.fn();
     const mockElement = createMockElement();
-    const addEventListenerSpy = jest.spyOn(mockElement, 'addEventListener');
 
     renderHook(() =>
-      useEventListener('foo', handler, { element: mockElement })
+      useEventListener('mousemove', handler, { element: mockElement })
     );
-
-    expect(addEventListenerSpy).toBeCalled();
 
     mockElement.dispatchEvent(mouseMoveEvent);
     expect(handler).toBeCalledWith(mouseMoveEvent);
+  });
 
-    addEventListenerSpy.mockRestore();
+  test('you pass an `eventName`, `handler`, and a `refElement`', async () => {
+    const handler = jest.fn();
+
+    const Component = ({ onClick }: { onClick: MouseEventHandler }) => {
+      const refElement = React.useRef<HTMLDivElement>(null);
+      useEventListener('click', onClick, { element: refElement });
+      return <div data-testid="div" ref={refElement} />;
+    };
+
+    render(<Component onClick={handler} />);
+
+    const divElement = screen.getByTestId('div');
+    fireEvent.click(divElement);
+
+    expect(handler).toHaveBeenCalledTimes(1);
   });
 
   test('you pass an `eventName`, `handler Object`, and an `element`', async () => {

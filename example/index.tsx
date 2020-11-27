@@ -22,11 +22,28 @@ const useKeyDown = () => {
   return key;
 };
 
+const useClickDiv = () => {
+  const refElement = React.useRef<HTMLDivElement>(null);
+  useEventListener(
+    'click',
+    () => {
+      alert('You clicked me!');
+    },
+    { element: refElement }
+  );
+  return refElement;
+};
+
 const App = () => {
   const [x, y] = useMouseMove();
   const key = useKeyDown();
+  const refElement = useClickDiv();
+
   return (
     <h1>
+      <div data-testid="div" ref={refElement}>
+        Click Me
+      </div>
       <div>
         The mouse position is ({x}, {y})
       </div>
