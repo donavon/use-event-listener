@@ -2,8 +2,6 @@
 
 A custom React Hook that provides a declarative addEventListener.
 
-> Note: Version 1.x has been completely rewritten in TypeScript. See [Parameters](#parameters) below important breaking changes.
-
 [![npm version](https://badge.fury.io/js/%40use-it%2Fevent-listener.svg)](https://badge.fury.io/js/%40use-it%2Fevent-listener) [![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors)
 
 This hook was inspired by [Dan Abramov](https://github.com/gaearon)'s
@@ -14,6 +12,12 @@ I needed a way to simplify the plumbing around adding and removing an event list
 in a custom hook.
 That lead to a [chain of tweets](https://twitter.com/donavon/status/1093612936621379584)
 between Dan and myself.
+
+## New in version 1.0.0
+
+- Version 1.x has been completely rewritten in TypeScript.
+- See [Parameters](#parameters) below for an important breaking change to `element`. Spoiler alert: it's now in `options`.
+- Now supports sending a ref as the element as well as a DOM element.
 
 ## Installation
 
@@ -52,12 +56,12 @@ Here are the parameters that you can use. (\* = optional).
 Here is the Options object. All keys are optional.
 See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) for details on `capture`, `passive`, and `once`.
 
-| Key       | Description                                                                                                                                                          |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `element` | An optional element to listen on. Defaults to `global` (i.e. `window`)                                                                                               |
-| `capture` | A Boolean indicating that events of this type will be dispatched to the registered listener before being dispatched to any `EventTarget` beneath it in the DOM tree. |
-| `passive` | A Boolean indicating that the handler will never call `preventDefault()`.                                                                                            |
-| `once`    | A Boolean indicating that the handler should be invoked at most once after being added. If true, the handler would be automatically removed when invoked.            |
+| Key       | Description                                                                                                                                                                                            |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `element` | An optional element to listen on. Defaults to `global` (i.e. `window`). In version 1.0.0 this can also be a `refElement` (i.e. the output from `useRef` that you pass to a React element or component) |
+| `capture` | A Boolean indicating that events of this type will be dispatched to the registered listener before being dispatched to any `EventTarget` beneath it in the DOM tree.                                   |
+| `passive` | A Boolean indicating that the handler will never call `preventDefault()`.                                                                                                                              |
+| `once`    | A Boolean indicating that the handler should be invoked at most once after being added. If true, the handler would be automatically removed when invoked.                                              |
 
 ### Return
 
@@ -101,6 +105,8 @@ const useMouseMove = () => {
 };
 ```
 
+### TypeScript example
+
 In TypeScript you can specify the type of the `Event` to be more specific. Here we set the handler's event type to `MouseEvent`.
 
 ```ts
@@ -111,6 +117,22 @@ const useMouseMove = () => {
   });
   return coords;
 };
+```
+
+### useRef exmple
+
+You can optionally pass a reference instead of an actual element. You might use this when a custom component accapts a ref but doesn't expose a way to pass in specific handlers.
+
+```js
+const refElement = React.useRef < HTMLDivElement > null;
+useEventListener(
+  'click',
+  () => {
+    alert('You clicked me!');
+  },
+  { element: refElement }
+);
+return <div ref={refElement}>Click Me</div>;
 ```
 
 ## Live demo
