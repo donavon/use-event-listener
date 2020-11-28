@@ -1,29 +1,21 @@
 {
   "name": "@use-it/event-listener",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "tag": "next"
   },
-  "version": "0.1.6",
+  "version": "1.0.0-beta.3",
   "description": "A custom React Hook that provides a useEventListener.",
-  "main": "dist/event-listener.js",
-  "umd:main": "dist/event-listener.umd.js",
-  "module": "dist/event-listener.m.js",
-  "source": "src/index.js",
-  "types": "types/index.d.ts",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/donavon/use-event-listener.git"
-  },
-  "scripts": {
-    "prepublishOnly": "npm run build",
-    "lint": "eslint src",
-    "test": "jest --verbose --coverage --silent && tsc -p types/tsconfig.json",
-    "test:watch": "jest --watch --runInBand --silent",
-    "tsc": "tsc -p types/tsconfig.json",
-    "prebuild": "npm run lint && npm t && rimraf dist",
-    "build": "microbundle -o dist/ --sourcemap false --target web",
-    "dev": "microbundle watch -o dist/ --sourcemap false --compress false"
+  "author": "Donavon West <github@donavon.com> (https://donavon.com/)",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
   },
   "keywords": [
     "react-hooks",
@@ -33,28 +25,41 @@
     "lib",
     "event-listener"
   ],
-  "author": "donavon",
-  "devDependencies": {
-    "@babel/core": "^7.12.3",
-    "@babel/preset-env": "^7.12.1",
-    "@babel/preset-react": "^7.12.5",
-    "@testing-library/jest-dom": "^5.11.6",
-    "@testing-library/react-hooks": "^3.4.2",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^26.6.3",
-    "eslint": "^7.13.0",
-    "eslint-config-amex": "^13.1.0",
-    "jest": "^26.6.3",
-    "microbundle": "^0.12.4",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
-    "react-test-renderer": "^16.14.0",
-    "rimraf": "^3.0.2",
-    "typescript": "^3.9.7"
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test:watch": "tsdx test --passWithNoTests --watchAll",
+    "test": "tsdx test --passWithNoTests --coverage",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "size": "size-limit",
+    "analyze": "size-limit --why"
   },
   "peerDependencies": {
-    "react": "^16.8.0"
+    "react": ">=16.8"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "module": "dist/use-event-listener-ts.esm.js",
+  "size-limit": [
+    {
+      "path": "dist/use-event-listener-ts.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/use-event-listener-ts.esm.js",
+      "limit": "10 KB"
+    }
+  ],
   "jest": {
     "coverageThreshold": {
       "global": {
@@ -64,5 +69,23 @@
         "statements": 100
       }
     }
+  },
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^4.9.0",
+    "@testing-library/react": "^11.2.2",
+    "@testing-library/react-hooks": "^3.4.2",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "husky": "^4.3.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-test-renderer": "^17.0.1",
+    "size-limit": "^4.9.0",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.0.3",
+    "typescript": "^4.1.2"
+  },
+  "dependencies": {
+    "global-event-target": "^0.1.0"
   }
 }
