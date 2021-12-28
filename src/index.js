@@ -1,10 +1,12 @@
 /* eslint-disable max-params */
 import { useRef, useEffect } from 'react';
 
+const globalObject = typeof window === 'undefined' ? global : window
+
 const useEventListener = (
   eventName,
   handler,
-  element = global,
+  element = globalObject,
   options = {}
 ) => {
   const savedHandler = useRef();
