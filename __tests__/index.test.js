@@ -41,9 +41,9 @@ describe('useEventListener', () => {
     addEventListenerSpy.mockRestore();
   });
 
-  test.skip('`element` is optional (defaults to `window`/`global`)', () => {
+  test.skip('`element` is optional (defaults to `window`/`globalThis`)', () => {
     const handler = jest.fn();
-    const addEventListenerSpy = jest.spyOn(global, 'addEventListener');
+    const addEventListenerSpy = jest.spyOn(globalThis, 'addEventListener');
 
     renderHook(() => useEventListener('foo', handler));
 
@@ -54,7 +54,7 @@ describe('useEventListener', () => {
 
   test.skip('does not add event listener to `window` if `element` is `null`', () => {
     const handler = jest.fn();
-    const addEventListenerSpy = jest.spyOn(global, 'addEventListener');
+    const addEventListenerSpy = jest.spyOn(globalThis, 'addEventListener');
 
     renderHook(() => useEventListener('foo', handler, null));
 
