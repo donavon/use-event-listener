@@ -41,7 +41,7 @@ Here are the parameters that you can use. (\* = optional)
 | :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `eventName` | The event name (string). Here is a list of [common events](https://developer.mozilla.org/en-US/docs/Web/Events).                                                                                                                       |
 | `handler`   | A function that will be called whenever `eventName` fires on `element`.                                                                                                                                                                |
-| `element`\* | An optional element to listen on. Defaults to `global` (i.e., `window`).                                                                                                                                                               |
+| `element`\* | An optional element to listen on. Defaults to `globalThis` (i.e., `window`).                                                                                                                                                           |
 | `options`\* | An object `{ capture?: boolean, passive?: boolean, once?: boolean }` to be passed to `addEventListener`. For advanced use cases. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) for details. |
 
 ### Return

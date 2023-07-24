@@ -4,7 +4,7 @@ import { useRef, useEffect } from 'react';
 const useEventListener = (
   eventName,
   handler,
-  element = global,
+  element = globalThis,
   options = {}
 ) => {
   const savedHandler = useRef();
